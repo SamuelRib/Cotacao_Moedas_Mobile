@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
 
             .build()
-            .create(ApiCotacao::class.java) //talvez seja outro create
+            .create(ApiCotacao::class.java)
 
         fun atualizarMoedas(){
             val finalURL = "USD-BRL,EUR-BRL,BTC-BRL"
