@@ -4,7 +4,9 @@ package com.sam.cotacao_moedas.model
 
 data class ParMoeda(
     val USDBRL: Moeda,
-    val BTCBRL: Moeda
+    val EURBRL: Moeda,
+    val BTCBRL: Moeda,
+    val ETHBRL: Moeda
 )
 data class Moeda (
     //var USDBRL: String?= null,

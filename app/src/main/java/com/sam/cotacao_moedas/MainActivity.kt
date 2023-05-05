@@ -31,13 +31,15 @@ class MainActivity : AppCompatActivity() {
             .create(ApiCotacao::class.java)
 
         fun atualizarMoedas(){
-            val finalURL = "USD-BRL,EUR-BRL,BTC-BRL"
+            val finalURL = "USD-BRL,EUR-BRL,BTC-BRL,ETH-BRL"
             retrofit.setMoeda(finalURL).enqueue(object : Callback<ParMoeda>{
                 override fun onResponse(call: Call<ParMoeda>, response: Response<ParMoeda>) {
                     if (response.code() == 200){
                         val dolar1 = response.body()?.USDBRL?.bid.toString()
+                        val euro = response.body()?.EURBRL?.bid.toString()
                         val btc = response.body()?.BTCBRL?.bid.toString()
-                        setMoedas(dolar1,btc)
+                        val eth = response.body()?.ETHBRL?.bid.toString()
+                        setMoedas(dolar1, euro, btc, eth)
                     }
                     else{
                         Toast.makeText(applicationContext,"Deu erro!",Toast.LENGTH_SHORT).show()
@@ -57,9 +59,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setMoedas (dolar1: String, btc: String){
+    private fun setMoedas (dolar1: String, euro: String, btc: String, eth: String){
        binding.txtDolar.setText(dolar1)
+       binding.txtEuro.setText(euro)
        binding.txtBtc.setText(btc)
+       binding.txtEth.setText(eth)
     }
 
 }
