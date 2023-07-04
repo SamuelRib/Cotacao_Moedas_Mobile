@@ -1,7 +1,5 @@
 package com.sam.cotacao_moedas.model
 
-
-
 data class ParMoeda(
     val USDBRL: Moeda,
     val EURBRL: Moeda,

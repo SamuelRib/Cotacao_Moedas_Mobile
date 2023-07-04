@@ -11,6 +11,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.NumberFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://economia.awesomeapi.com.br/json/last/")
             .addConverterFactory(GsonConverterFactory.create())
-
             .build()
             .create(ApiCotacao::class.java)
 
@@ -60,10 +61,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMoedas (dolar1: String, euro: String, btc: String, eth: String){
-       binding.txtDolar.setText(dolar1)
-       binding.txtEuro.setText(euro)
-       binding.txtBtc.setText(btc)
-       binding.txtEth.setText(eth)
+        val localeBR = Locale("pt", "BR")
+        val localeUS = Locale("en", "US")
+
+        binding.txtDolar.setText("${transformaEmMoeda(dolar1.toDouble(), localeBR)}")
+       binding.txtEuro.setText("${transformaEmMoeda(euro.toDouble(), localeBR)}")
+       binding.txtBtc.setText("${transformaEmMoeda(btc.toDouble(),localeBR)}")
+       binding.txtEth.setText("${transformaEmMoeda(eth.toDouble(),localeBR)}")
+    }
+
+    private fun transformaEmMoeda (number: Double, locale: Locale): String{
+        val currencyFormat = NumberFormat.getCurrencyInstance(locale)
+        return currencyFormat.format(number)
     }
 
 }
